@@ -1,4 +1,4 @@
-const { priceOrder } = require('.');
+const { priceOrder, applyShipping } = require('.');
 
 describe('priceOrder', () => {
   it('should calculate the base price for an order not eligible for discounts and with free shipping', () => {
@@ -35,5 +35,29 @@ describe('priceOrder', () => {
       const price = priceOrder(product, quantity, shippingMethod);
       expect(price).toEqual(110);
     });
+  });
+});
+
+describe('applyShipping', () => {
+  it('should use the discountFee value if the base price is eligible for discounted shipping', () => {
+    const quantity = 10;
+    const basePrice = 100;
+    const discount = 0;
+    const shippingMethod = { discountThreshold: 1, discountFee: 1, feePerCase: 0 };
+
+    const price = applyShipping(basePrice, shippingMethod, quantity, discount);
+
+    expect(price).toEqual(110);
+  });
+
+  it('should use the feePerCase value if the base price is not eligible for discounted shipping', () => {
+    const quantity = 10;
+    const basePrice = 100;
+    const discount = 0;
+    const shippingMethod = { discountThreshold: Infinity, discountFee: 0, feePerCase: 1 };
+
+    const price = applyShipping(basePrice, shippingMethod, quantity, discount);
+
+    expect(price).toEqual(110);
   });
 });
