@@ -43,7 +43,7 @@ describe('applyShipping', () => {
     const quantity = 10;
     const basePrice = 100;
     const discount = 0;
-    const priceData = { basePrice, quantity };
+    const priceData = { basePrice, quantity, discount };
     const shippingMethod = { discountThreshold: 1, discountFee: 1, feePerCase: 0 };
 
     const price = applyShipping(priceData, shippingMethod, discount);
@@ -55,7 +55,7 @@ describe('applyShipping', () => {
     const quantity = 10;
     const basePrice = 100;
     const discount = 0;
-    const priceData = { basePrice, quantity };
+    const priceData = { basePrice, quantity, discount };
     const shippingMethod = { discountThreshold: Infinity, discountFee: 0, feePerCase: 1 };
 
     const price = applyShipping(priceData, shippingMethod, discount);
