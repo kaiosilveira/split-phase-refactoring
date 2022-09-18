@@ -10,8 +10,7 @@ function applyShipping(priceData, shippingMethod) {
       : shippingMethod.feePerCase;
 
   const shippingCost = priceData.quantity * shippingPerCase;
-  const price = priceData.basePrice - priceData.discount + shippingCost;
-  return price;
+  return priceData.basePrice - priceData.discount + shippingCost;
 }
 
 function calculatePricingData(product, quantity) {
