@@ -40,10 +40,10 @@ describe('priceOrder', () => {
 
 describe('applyShipping', () => {
   it('should use the discountFee value if the base price is eligible for discounted shipping', () => {
-    const priceData = {};
     const quantity = 10;
     const basePrice = 100;
     const discount = 0;
+    const priceData = { basePrice };
     const shippingMethod = { discountThreshold: 1, discountFee: 1, feePerCase: 0 };
 
     const price = applyShipping(priceData, basePrice, shippingMethod, quantity, discount);
@@ -52,10 +52,10 @@ describe('applyShipping', () => {
   });
 
   it('should use the feePerCase value if the base price is not eligible for discounted shipping', () => {
-    const priceData = {};
     const quantity = 10;
     const basePrice = 100;
     const discount = 0;
+    const priceData = { basePrice };
     const shippingMethod = { discountThreshold: Infinity, discountFee: 0, feePerCase: 1 };
 
     const price = applyShipping(priceData, basePrice, shippingMethod, quantity, discount);
