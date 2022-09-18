@@ -1,7 +1,6 @@
 function priceOrder(product, quantity, shippingMethod) {
   const priceData = calculatePricingData(product, quantity);
-  const price = applyShipping(priceData, shippingMethod);
-  return price;
+  return applyShipping(priceData, shippingMethod);
 }
 
 function applyShipping(priceData, shippingMethod) {
