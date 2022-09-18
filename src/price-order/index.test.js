@@ -1,4 +1,4 @@
-const { priceOrder, applyShipping } = require('.');
+const { priceOrder, applyShipping, calculatePricingData } = require('.');
 
 describe('priceOrder', () => {
   it('should calculate the base price for an order not eligible for discounts and with free shipping', () => {
@@ -61,5 +61,29 @@ describe('applyShipping', () => {
     const price = applyShipping(priceData, shippingMethod);
 
     expect(price).toEqual(110);
+  });
+});
+
+describe('calculatePricingData', () => {
+  it('should calculate the pricing data for an order not eligible for discounts and with free shipping', () => {
+    const quantity = 10;
+    const product = { basePrice: 10, discountThreshold: Infinity, discountRate: 10 };
+
+    const priceData = calculatePricingData(product, quantity);
+
+    expect(priceData.basePrice).toEqual(100);
+    expect(priceData.quantity).toEqual(quantity);
+    expect(priceData.discount).toEqual(0);
+  });
+
+  it('should add a discount of a specified discountRate for every item above the specified discountThreshold', () => {
+    const quantity = 10;
+    const product = { basePrice: 10, discountThreshold: 9, discountRate: 0.1 };
+
+    const priceData = calculatePricingData(product, quantity);
+
+    expect(priceData.basePrice).toEqual(100);
+    expect(priceData.quantity).toEqual(quantity);
+    expect(priceData.discount).toEqual(1);
   });
 });
