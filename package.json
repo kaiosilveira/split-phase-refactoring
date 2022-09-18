@@ -1,0 +1,14 @@
+{
+  "name": "split-phase",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kaiosilveira/split-phase-refactoring.git",
+  "author": "Kaio Silveira",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --passWithNoTests"
+  },
+  "devDependencies": {
+    "jest": "^29.0.3"
+  }
+}
