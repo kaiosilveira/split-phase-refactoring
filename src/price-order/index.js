@@ -3,11 +3,11 @@ function priceOrder(product, quantity, shippingMethod) {
   const discount =
     Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
   const priceData = { basePrice, quantity, discount };
-  const price = applyShipping(priceData, shippingMethod, discount);
+  const price = applyShipping(priceData, shippingMethod);
   return price;
 }
 
-function applyShipping(priceData, shippingMethod, discount) {
+function applyShipping(priceData, shippingMethod) {
   const shippingPerCase =
     priceData.basePrice > shippingMethod.discountThreshold
       ? shippingMethod.discountFee
