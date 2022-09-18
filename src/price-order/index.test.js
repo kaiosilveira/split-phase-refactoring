@@ -46,7 +46,7 @@ describe('applyShipping', () => {
     const priceData = { basePrice };
     const shippingMethod = { discountThreshold: 1, discountFee: 1, feePerCase: 0 };
 
-    const price = applyShipping(priceData, basePrice, shippingMethod, quantity, discount);
+    const price = applyShipping(priceData, shippingMethod, quantity, discount);
 
     expect(price).toEqual(110);
   });
@@ -58,7 +58,7 @@ describe('applyShipping', () => {
     const priceData = { basePrice };
     const shippingMethod = { discountThreshold: Infinity, discountFee: 0, feePerCase: 1 };
 
-    const price = applyShipping(priceData, basePrice, shippingMethod, quantity, discount);
+    const price = applyShipping(priceData, shippingMethod, quantity, discount);
 
     expect(price).toEqual(110);
   });
